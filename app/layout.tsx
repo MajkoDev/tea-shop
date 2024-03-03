@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "Silk Road Tea House",
   description:
     "Step into the enchanting world of Silk Road Tea House, where ancient traditions meet modern indulgence",
+    icons: {
+      icon: '../public/tea-pot.svg'
+    }
 };
 
 export default function RootLayout({
@@ -26,6 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+        <head />
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -33,7 +37,6 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          <Navbar />
           {children}
         </Providers>
       </body>

@@ -15,5 +15,24 @@ export const product = defineType({
     { name: "description", title: "Description", type: "string" },
     { name: "currency", title: "Currency", type: "string" },
     { name: "price", title: "Price", type: "number" },
+    { 
+      name: "images", 
+      title: "Images", 
+      type: "array", 
+      of: [{ type: "image" }] 
+    },
+    { name: "sku", title: "SKU", type: "string" },
+    {
+      name: "category",
+      title: "Category",
+      type: "reference",
+      to: [{ type: "category" }],
+    },
+    {
+      name: "origin",
+      title: "Origin",
+      type: "reference",
+      to: [{ type: "origin" }],
+    },
   ],
 });
