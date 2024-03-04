@@ -1,9 +1,5 @@
-import Link from "next/link";
-import Image from "next/image";
-
-import { Product } from "@/lib/types";
 import { client } from "@/sanity/lib/client";
-import { urlForImage } from "@/sanity/lib/image";
+import ProductCard from "@/components/product-card";
 
 interface cartProduct {
   _id: string;
@@ -38,30 +34,13 @@ export default async function Page() {
       {/* ProductSort */}
       {/* ProductFilters */}
 
-      {/* ProductGrid */}
-      <div className="my-6 flex flex-col gap-2">
-        {products.map((product) => (
-          <Link
-            key={product._id}
-            href={`/products/${product.slug}`}
-            className="text-md my-2"
-          >
-            <div className="h-44 w-44">
-              <Image
-                src={product.imageUrl}
-                alt={product.name}
-                width={155}
-                height={180}
-                className="h-full w-full object-cover object-center"
-  
-              />
-            </div>
-
-            <h3 className="mt-4 font-medium">{product.name}</h3>
-          </Link>
-        ))}
+      <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+        <div className="grid grid-col-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+          {products.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </div>
       </div>
-      {/* ProductCard */}
     </div>
   );
 }
