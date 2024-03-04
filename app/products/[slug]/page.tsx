@@ -1,6 +1,10 @@
 import { Product } from "@/lib/types";
 import { client } from "@/sanity/lib/client";
 
+import ProductInfo from "@/components/product-info";
+import ProductGallery from "@/components/product-gallery";
+import ProductRelated from "@/components/product-related";
+
 interface Props {
   params: {
     slug: string;
@@ -29,13 +33,17 @@ export default async function Page({ params }: Props) {
   // console.log(product);
 
   return (
-    <div>
-      <h1 className="text-center text-2xl font-light my-12 italics">
-        {product.name}
-      </h1>
-      {/* ProductGallery */}
-      {/* ProductInfo */}
-      {/* ProductRelated */}
+    <div className="mx-auto max-w-5xl sm:px-6 sm:pt-16 lg:px-8">
+      <div className="mx-auto max-w-2xl lg:max-w-none">
+        <div className="pb-20 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-12">
+          {/* Product gallery */}
+          <ProductGallery product={product} />
+          {/* Product info */}
+          <ProductInfo product={product} />
+        </div>
+      </div>
+
+      <ProductRelated />
     </div>
   );
 }
