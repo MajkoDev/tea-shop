@@ -1,5 +1,5 @@
-import { client } from "@/sanity/lib/client";
 import Link from "next/link";
+import { client } from "@/sanity/lib/client";
 
 interface cartProduct {
   _id: string;
