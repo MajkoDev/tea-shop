@@ -23,63 +23,59 @@ const teas = [
 
 export default function Navbar() {
   return (
-    <nav className="supports-backdrop-blur:bg-background/90 sticky top-0 z-50 w-full border-b bg-background/90 backdrop-blur mb-4 px-[1.4rem] md:px-[4rem] lg:px-[6rem] xl:px-[8rem] 2xl:px-[12rem]">
-      <div className="my-4 px-12 lg:px-24">
-        <NavigationMenu className="max-w-full">
-          <NavigationMenuList className="flex flex-row items-center justify-between gap-6 lg:gap-16 xl:gap-24 max-w-full">
-            <NavigationMenuItem>
-              <Link href="/" legacyBehavior passHref>
-                <NavigationMenuLink>Home</NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
+    <NavigationMenu className="max-w-full">
+      <NavigationMenuList className="flex flex-row items-center justify-between gap-6 lg:gap-16 xl:gap-24 max-w-full">
+        <NavigationMenuItem>
+          <Link href="/" legacyBehavior passHref>
+            <NavigationMenuLink>Home</NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
 
-            <NavigationMenuItem>
-              <Link href="/about" legacyBehavior passHref>
-                <NavigationMenuLink>About</NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
+        <NavigationMenuItem>
+          <Link href="/about" legacyBehavior passHref>
+            <NavigationMenuLink>About</NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
 
-            <NavigationMenuItem>
-              <NavigationMenuTrigger className="text-md font-[400]">
-                Teas
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                  {teas.map((tea) => (
-                    <li key={tea.value}>
-                      <NavigationMenuLink asChild>
-                        <a
-                          className={cn(
-                            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                          )}
-                        >
-                          <div className="text-sm font-medium leading-none">
-                            {tea.label}
-                          </div>
-                        </a>
-                      </NavigationMenuLink>
-                    </li>
-                  ))}
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger className="text-md font-[400]">
+            Teas
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+              {teas.map((tea) => (
+                <li key={tea.value}>
+                  <NavigationMenuLink asChild>
+                    <a
+                      className={cn(
+                        "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                      )}
+                    >
+                      <div className="text-sm font-medium leading-none">
+                        {tea.label}
+                      </div>
+                    </a>
+                  </NavigationMenuLink>
+                </li>
+              ))}
+            </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
 
-            <NavigationMenuItem>
-              <NavigationMenuTrigger className="text-md font-[400]">
-                Tea Accessories
-              </NavigationMenuTrigger>
-              <NavigationMenuContent></NavigationMenuContent>
-            </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger className="text-md font-[400]">
+            Tea Accessories
+          </NavigationMenuTrigger>
+          <NavigationMenuContent></NavigationMenuContent>
+        </NavigationMenuItem>
 
-            <NavigationMenuItem>
-              <Link href="/blog" legacyBehavior passHref>
-                <NavigationMenuLink>Blog</NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
-      </div>
-    </nav>
+        <NavigationMenuItem>
+          <Link href="/blog" legacyBehavior passHref>
+            <NavigationMenuLink>Blog</NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 }
 
