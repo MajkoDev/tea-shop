@@ -28,7 +28,7 @@ export default async function ProductRelated() {
   const products: cartProduct[] = await getProducts();
 
   return (
-    <section className="bg-slate-50 w-full pl-4 py-6">
+    <section className="bg-slate-100 w-full pl-4 py-6">
       <h1 className="text-2xl text-center md:text-start md:text-3xl font-medium pb-2 pl-4">
         Related Products
       </h1>
@@ -46,7 +46,7 @@ export default async function ProductRelated() {
               }}
             ></div>
             <div className="w-64 px-1">
-              <h1 className="text-sm text-center font-medium text-slate-700 overflow-hidden">
+              <h1 className="text-sm text-center font-medium text-slate-400 overflow-hidden">
                 {product.name}
               </h1>
             </div>

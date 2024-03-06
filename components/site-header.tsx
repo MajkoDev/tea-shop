@@ -35,7 +35,7 @@ export default function SiteHeader() {
     >
       <div
         className={`flex justify-between items-center transition-height duration-300 ${
-          isScrolled ? "my-1 pt-1" : "my-3"
+          isScrolled ? "pt-1" : "my-3"
         } `}
       >
         <NavLogo />

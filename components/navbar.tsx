@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import {
   NavigationMenu,
@@ -32,8 +30,8 @@ export default function Navbar() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <Link href="/about" legacyBehavior passHref>
-            <NavigationMenuLink>About</NavigationMenuLink>
+          <Link href="/products" legacyBehavior passHref>
+            <NavigationMenuLink>Products</NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
 
