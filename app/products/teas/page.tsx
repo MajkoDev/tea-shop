@@ -10,7 +10,7 @@ interface cartProduct {
   imageUrl: string;
 }
 
-const getProducts = async (): Promise<cartProduct[]> => {
+const getTeaProducts = async (): Promise<cartProduct[]> => {
   const query = `*[_type == "product"]{
     _id, 
     name, 
@@ -24,12 +24,12 @@ const getProducts = async (): Promise<cartProduct[]> => {
 };
 
 export default async function Page() {
-  const products: cartProduct[] = await getProducts();
+  const products: cartProduct[] = await getTeaProducts();
 
   return (
     <div>
-      <h1 className="text-center text-2xl font-light my-12 italics">
-        Products
+      <h1 className="text-3xl font-extralight my-12 text-center">
+        Tea Products
       </h1>
       {/* ProductSort */}
       {/* ProductFilters */}

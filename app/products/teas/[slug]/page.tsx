@@ -11,7 +11,7 @@ interface Props {
   };
 }
 
-const getProduct = async (slug: string): Promise<Product> => {
+const getTeaProduct = async (slug: string): Promise<Product> => {
   const query = `*[_type == "product" && slug.current == "${slug}"][0]{
     _id, 
     name,
@@ -29,8 +29,7 @@ const getProduct = async (slug: string): Promise<Product> => {
 };
 
 export default async function Page({ params }: Props) {
-  const product = await getProduct(params.slug);
-  // console.log(product);
+  const product = await getTeaProduct(params.slug);
 
   return (
     <div className="mx-auto max-w-5xl sm:px-6 sm:pt-16 lg:px-8">

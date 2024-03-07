@@ -25,22 +25,22 @@ export default function SiteHeader() {
         <div className="flex flex-row gap-1">
           <NavigationMenu className="hidden md:block">
             <NavigationMenuList>
-              <NavigationMenuItem>
-                <Button variant="ghost" className="rounded-lg">
-                  Tea
-                </Button>
-              </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Button variant="ghost" className="rounded-lg">
+                    Tea
+                  </Button>
+                </NavigationMenuItem>
 
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="rounded-lg">
                   Other Products
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <Link href="/accessories">
+                  <Link href="/products/accessories">
                     <ListItem>Tea Accessories</ListItem>
                   </Link>
 
-                  <Link href="/courses">
+                  <Link href="/products/courses">
                     <ListItem>Tea Courses</ListItem>
                   </Link>
                 </NavigationMenuContent>
@@ -65,9 +65,9 @@ export default function SiteHeader() {
 const ListItem = ({ children }: { children: string }) => {
   return (
     <NavigationMenuLink asChild>
-      <a className="w-44 block select-none space-y-1 rounded-md p-3 no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+      <div className="w-44 block select-none space-y-1 rounded-md p-3 no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
         <h3 className="text-sm font-medium">{children}</h3>
-      </a>
+      </div>
     </NavigationMenuLink>
   );
 };
