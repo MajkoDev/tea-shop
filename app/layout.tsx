@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 import Providers from "@/components/providers";
 import SiteHeader from "@/components/site-header";
-import SiteFooter from '@/components/site-footer'
+import SiteFooter from "@/components/site-footer";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -32,10 +32,13 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Providers> <SiteHeader />
-          {children}
+        <Providers>
+          <SiteHeader />
+          <main className="px-[1.4rem] md:px-[4rem] lg:px-[6rem] xl:px-[8rem] 2xl:px-[8rem]">
+            {children}
+          </main>
           <SiteFooter />
-          </Providers>
+        </Providers>
       </body>
     </html>
   );
