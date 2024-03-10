@@ -1,10 +1,45 @@
+import Image from "next/image";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import React from "react";
+
+import { client } from "@/sanity/lib/client";
+
+interface TeaAccessory {
+  _id: string;
+  name: string;
+  slug: string;
+  description: string;
+  price: number;
+  currency: string;
+}
+
+const getTeaAccessories = async (): Promise<TeaAccessory[]> => {
+  const query = `*[_type == "accessory"]{
+    _id, 
+    name, 
+    "slug": slug.current,
+    description, 
+    price, 
+    currency
+  }`;
+  const data = await client.fetch(query);
+  return data;
+};
 
 export default function Page() {
   return (
     <div>
       {/* HERO */}
+
+      <ListTeaAccessories />
 
       <section className="w-full h-[93vh] bg-slate-50 mx-auto">
         <div className="flex flex-col md:flex-row">
@@ -29,9 +64,11 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="w-full md:w-1/2 md:ml-5 m-2">
-            <img
-              alt=""
+          <div className="w-full md:w-1/2 md:ml-5 m-4">
+            <Image
+              alt="primaryImage"
+              width={600}
+              height={600}
               src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
               className="h-full w-full object-cover object-center sm:h-80 lg:h-96 rounded-3xl rounded-tr-none hover:scale-105 duration-700 ease-in-out"
             />
@@ -40,7 +77,13 @@ export default function Page() {
 
         <div className="flex h-60 flex-col md:flex-row">
           <div className="hidden md:block w-full md:w-1/3 bg-gray-200 m-2 rounded-3xl rounded-bl-none">
-            <div className="text-center my-12">Secondary Image</div>
+            <Image
+              alt="secondaryImage"
+              width={300}
+              height={300}
+              src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+              className=" object-cover object-center sm:h-80 lg:h-96 rounded-3xl rounded-tr-none hover:scale-105 duration-700 ease-in-out"
+            />
           </div>
           <div className="w-full md:w-2/3 bg-gray-700 m-2 rounded-xl">
             <div className="text-center text-2xl font-extralight text-slate-100">
@@ -99,13 +142,12 @@ function TeaAccessoriesFilter() {
 function TeaAccessoryCard() {
   return (
     <article className="group m-2 shadow-xl h-fit p-2 rounded-xl">
-      <div  className="aspect-h-1 aspect-w-1 overflow-hidden rounded-xl">
-
-      <img
-        alt=""
-        src="https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-        className="h-64 w-full object-cover transition group-hover:scale-110 duration-700 ease-in-out"
-      />
+      <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-xl">
+        <img
+          alt=""
+          src="https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+          className="h-64 w-full object-cover transition group-hover:scale-110 duration-700 ease-in-out"
+        />
       </div>
 
       <div className="p-1 text-center">
@@ -118,5 +160,33 @@ function TeaAccessoryCard() {
         </p>
       </div>
     </article>
+  );
+}
+
+async function ListTeaAccessories() {
+  const accessories = await getTeaAccessories();
+
+  return (
+    <div className="w-full p-3 flex flex-wrap gap-3">
+      {accessories.map((accessory) => (
+        <div key={accessory._id}>
+          <TeaAccCard accessory={accessory} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function TeaAccCard({ accessory }: any) {
+  return (
+    <Card className="container">
+      <CardHeader className="mb-0">
+        <CardTitle className="text-lg">{accessory.name}</CardTitle>
+        <CardDescription>
+          <p className="text-sm">{accessory.description}</p>
+          <p className="text-sm font-bold">{accessory.price}</p>
+        </CardDescription>
+      </CardHeader>
+    </Card>
   );
 }
