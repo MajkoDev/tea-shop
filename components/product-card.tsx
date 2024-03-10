@@ -10,6 +10,7 @@ function cn(...classes: string[]) {
 
 export default function ProductCard({ product }: any) {
   const [isLoading, setIsLoading] = useState(true);
+  
   return (
     <Link className="group" href={`/products/${product.slug}`}>
       <div className="aspect-w-1 aspect-h-1 xl:aspect-w-8 xl:aspect-h-8 w-full overflow-hidden rounded-lg bg-gray-200">

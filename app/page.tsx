@@ -20,57 +20,38 @@ const getOrigins = async (): Promise<Origin[]> => {
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <section className="flex flex-col md:flex-row-reverse justify-start items-start h-[93vh] bg-slate-50">
-        <div className="w-full md:w-2/3 lg:w-1/2 h-[30rem] md:h-[26rem] bg-slate-400 m-2 rounded-xl">
-          <h2 className="text-center text-white text-2xl">Hero Image</h2>
-        </div>
-        <div className="w-full md:w-1/2 bg-slate-300 m-2">
-          <h2 className="text-center text-white text-3xl">Hero Title</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore vel
-            nam quas soluta. Veritatis tenetur soluta, optio libero quaerat
-            architecto aut. Vero, error in.
-          </p>
-          <div className="flex flex-row">
-            <Button className="m-1 rounded-lg">Explore</Button>
-            <Button className="m-1 rounded-lg">Become Customer</Button>
+      <section className="flex flex-col justify-start items-start h-screen bg-slate-50">
+        <div className="w-full h-2/3 bg-slate-200 rounded-xl flex flex-col mt-2 justify-center items-center">
+          <div className="max-w-md text-center flex flex-col items-center">
+            <h1 className="text-3xl font-extrabold text-transparent bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text">
+              Tea Hero Image
+            </h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
+              vel nam quas soluta. Veritatis tenetur soluta, optio libero
+              quaerat architecto aut. Vero, error in.
+            </p>
+            <div className="flex flex-row gap-3">
+              <Button className="m-1 rounded-lg">Explore</Button>
+              <Button className="m-1 rounded-lg" variant="outline">
+                Become Customer
+              </Button>
+            </div>
           </div>
         </div>
+   
+   
       </section>
 
-      <section>
-        <div>Image</div>
-        <div>What We Offer</div>
-      </section>
-
-      <section>
-        <h1>Introduction</h1>
-        <div className="flex">
-          <div />
-          <div>Subscribe</div>
-          <div />
+      <section className="flex flex-col justify-start items-start h-screen bg-slate-100">
+        <div className="w-full text-center md:flex justify-center items-center">
+          <h1 className="my-12 text-2xl md:text-3xl font-extralight mx-4 md:w-3/4">
+            Discover teas from around the world <br /> - China, Japan, India,
+            and more! Explore now!
+          </h1>
         </div>
+        <OriginList />
       </section>
-
-      <section>
-        <div>First Table</div>
-        {/*
-  
-      <div>Second Table</div>
-      <div>Third Table</div>
-  */}
-      </section>
-
-      <div className="container bg-slate-300 h-96 w-full"></div>
-
-      <div className="flex flex-col md:flex-row gap-3 bg-slate-50 p-3 w-full">
-        <div className="flex-1 w-full h-52 bg-slate-200">
-          <h3 className="text-center font-extralight">Content</h3>
-        </div>
-        <div className="flex-1 w-full h-52 bg-slate-200">
-          <h3 className="text-center font-extralight">Content</h3>
-        </div>
-      </div>
     </div>
   );
 }
@@ -79,10 +60,15 @@ async function OriginList() {
   const origins: Origin[] = await getOrigins();
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="w-full flex flex-row gap-4 mb-6 px-8">
       {origins.map((origin) => (
-        <div key={origin._id}>
-          <p className="text-center">{origin.name}</p>
+        <div
+          key={origin._id}
+          className="bg-slate-500 flex-1 h-24 rounded-xl flex items-center justify-center hover:cursor-pointer hover:scale-105 duration-100 ease-in-out"
+        >
+          <h3 className="text-xl font-bold text-center text-slate-50">
+            {origin.name}
+          </h3>
         </div>
       ))}
     </div>
