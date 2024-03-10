@@ -1,4 +1,36 @@
-import React from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+import { client } from "@/sanity/lib/client";
+
+interface Course {
+  _id: string;
+  name: string;
+  slug: string;
+  description: string;
+  price: number;
+  currency: string;
+}
+
+const getTeaCourses = async (): Promise<Course[]> => {
+  const query = `*[_type == "course"]{
+    _id, 
+    name, 
+    "slug": slug.current,
+    description, 
+    price, 
+    currency
+  }`;
+  const data = await client.fetch(query);
+  return data;
+};
 
 export default function Page() {
   return (
@@ -27,62 +59,48 @@ export default function Page() {
       </div>
 
       {/* PRODUCTS */}
-      <div className="flex flex-col gap-4">
-        <div className="w-full bg-slate-100 rounded-xl flex flex-col gap-2 p-4">
-          <div className="flex flex-col items-center">
-            <h1 className="text-center font-bold text-xl">Tea Essentials</h1>
-            <div className="flex flex-row gap-4 text-slate-500 font-semibold">
-              <p>27.3.2024</p>
-              <p>from 9:00 to 15:00</p>
-            </div>
-            <div className="flex flex-col md:flex-row md:gap-3">
-              <div className="flex-1 text-sm">
-                <h3 className="text-slate-500">Description</h3>
-                <p>
-                  Join us for "Tea Essentials," a course designed for beginners
-                  and enthusiasts alike to discover the fundamentals of tea
-                  preparation. Learn about the origins of tea, the various
-                  types, and the essential tools for brewing the perfect cup.
-                </p>
-                <ol className="divide-y divide-gray-200 mt-4 mb-2">
-                <li className="text-xs py-1">
-                    Introduction to tea varieties: green, black, oolong, and
-                    herbal.
-                  </li>
-                  <li className="text-xs py-1">
-                    Hands-on experience in selecting and measuring tea leaves.
-                  </li>
-                  <li className="text-xs py-1">
-                    Understanding water temperature and steeping times for
-                    different types of tea.
-                  </li>
-                </ol>
 
-                <p className="font-semibold">
-                  In this course, participants will gain a deeper appreciation
-                  for tea culture and develop the skills needed to brew a
-                  delightful cup of tea from start to finish.
-                </p>
-              </div>
-             <div className="flex-1">
-
-             </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ListTeaCourses />
     </div>
   );
 }
 
-function CourseProduct() {
+async function ListTeaCourses() {
+  const courses = await getTeaCourses();
+
   return (
-    <article>
-      <h1>type of course</h1>
-      <h2>time, date and place of event</h2>
-      <div>
-        <p>description</p>
-      </div>
-    </article>
+    <div className="w-full p-3 flex flex-wrap gap-3">
+      {courses.map((course) => (
+        <div key={course._id}>
+          <CourseProduct course={course} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function CourseProduct({ course }: any) {
+  return (
+    <Card className="container">
+      <CardHeader className="mb-0">
+        <CardTitle className="text-lg">{course.name}</CardTitle>
+        <CardDescription>
+          <div className="flex flex-row gap-4 text-slate-500 font-semibold">
+            <p>27.3.2024</p>
+            <p>from 9:00 to 15:00</p>
+          </div>
+        </CardDescription>
+      </CardHeader>
+
+      <CardContent>
+        <h3 className="text-slate-500 font-extrabold text-sm">Description</h3>
+        <p className="text-sm">{course.description}</p>
+      </CardContent>
+
+      <CardFooter className="flex justify-between">
+        <Button variant="outline">I am interested</Button>
+        <Button>Enroll for course</Button>
+      </CardFooter>
+    </Card>
   );
 }
