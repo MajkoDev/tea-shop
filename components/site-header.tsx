@@ -25,11 +25,13 @@ export default function SiteHeader() {
         <div className="flex flex-row gap-1">
           <NavigationMenu className="hidden md:block">
             <NavigationMenuList>
-                <NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link href="/products/teas">
                   <Button variant="ghost" className="rounded-lg">
                     Tea
                   </Button>
-                </NavigationMenuItem>
+                </Link>
+              </NavigationMenuItem>
 
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="rounded-lg">
@@ -53,7 +55,6 @@ export default function SiteHeader() {
                 Shopping Cart
               </Button>
             </Link>
-            <Button className="rounded-lg">Log In</Button>
             <ModeToggle />
           </div>
         </div>
