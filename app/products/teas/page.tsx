@@ -11,6 +11,8 @@ interface cartProduct {
   imageUrl: string;
 }
 
+
+// Fetching Tea Products
 const getTeaProducts = async (): Promise<cartProduct[]> => {
   const query = `*[_type == "product"]{
     _id, 
@@ -58,11 +60,12 @@ export default async function Page() {
           </div>
         </div>
       </div>
+ 
 
-      {/* ProductSort */}
-      {/* ProductFilters */}
+      <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+<TeaProductList />
 
-      <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8"></div>
+      </div>
     </div>
   );
 }
@@ -80,5 +83,5 @@ async function TeaProductList() {
 }
 
 function BasicProductCard({ product }: any) {
-  return <div></div>;
+  return <div></div>
 }
