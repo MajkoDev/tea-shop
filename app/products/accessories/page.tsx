@@ -21,6 +21,8 @@ interface TeaAccessory {
   currency: string;
 }
 
+
+// Fetching Tea Accessories
 const getTeaAccessories = async (): Promise<TeaAccessory[]> => {
   const query = `*[_type == "accessory"]{
     _id, 
@@ -38,9 +40,6 @@ export default function Page() {
   return (
     <div>
       {/* HERO */}
-
-      <ListTeaAccessories />
-
       <section className="w-full h-[93vh] bg-slate-50 mx-auto">
         <div className="flex flex-col md:flex-row">
           <div className="w-full md:w-1/2 md:h-96 m-2 rounded-xl">
@@ -131,13 +130,7 @@ export default function Page() {
   );
 }
 
-function TeaAccessoriesFilter() {
-  return (
-    <div>
-      <h1>Choose category you are interested in.</h1>
-    </div>
-  );
-}
+
 
 function TeaAccessoryCard() {
   return (
