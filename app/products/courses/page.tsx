@@ -19,6 +19,7 @@ interface Course {
   currency: string;
 }
 
+// Fetching Tea Courses
 const getTeaCourses = async (): Promise<Course[]> => {
   const query = `*[_type == "course"]{
     _id, 
@@ -35,8 +36,7 @@ const getTeaCourses = async (): Promise<Course[]> => {
 export default function Page() {
   return (
     <div className="min-h-[66vh]">
-      {/* HERO */}
-
+      {/* HERO Section */}
       <div className="flex flex-col gap-2 mb-12">
         <h1 className="text-3xl font-extralight mt-12 mb-2 text-center">
           Tea Courses
@@ -58,8 +58,7 @@ export default function Page() {
         </p>
       </div>
 
-      {/* PRODUCTS */}
-
+      {/* PRODUCTS Section */}
       <ListTeaCourses />
     </div>
   );
@@ -79,15 +78,17 @@ async function ListTeaCourses() {
   );
 }
 
+// Course Card
 function CourseProduct({ course }: any) {
   return (
     <Card className="container">
       <CardHeader className="mb-0">
         <CardTitle className="text-lg">{course.name}</CardTitle>
-        <CardDescription>
-          <div className="flex flex-row gap-4 text-slate-500 font-semibold">
-            <p>27.3.2024</p>
-            <p>from 9:00 to 15:00</p>
+        <CardDescription className="text-slate-500 font-semibold">
+          <div className="flex flex-row gap-4">
+
+          <p>27.3.2024</p>
+          <p>from 9:00 to 15:00</p>
           </div>
         </CardDescription>
       </CardHeader>
