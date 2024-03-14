@@ -13,6 +13,9 @@ export interface Product {
   category: Array<Category>;
 }
 
+
+
+
 export interface Category {
   _id: string;
   name: string;

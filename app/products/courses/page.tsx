@@ -1,3 +1,7 @@
+"use client";
+
+import Image from "next/image";
+
 import {
   Card,
   CardContent,
@@ -9,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { client } from "@/sanity/lib/client";
+import { urlForImage } from "@/sanity/lib/image";
 
 interface Course {
   _id: string;
@@ -17,6 +22,7 @@ interface Course {
   description: string;
   price: number;
   currency: string;
+  image: string
 }
 
 // Fetching Tea Courses
@@ -27,6 +33,7 @@ const getTeaCourses = async (): Promise<Course[]> => {
     "slug": slug.current,
     description, 
     price, 
+    "image": image.asset->url,
     currency
   }`;
   const data = await client.fetch(query);
@@ -37,7 +44,7 @@ export default function Page() {
   return (
     <div className="min-h-[66vh]">
       {/* HERO Section */}
-      <div className="flex flex-col gap-2 mb-12">
+      <div className="flex flex-col gap-2 mb-12 h-96 items-center bg-slate-200 my-12 rounded-lg">
         <h1 className="text-3xl font-extralight mt-12 mb-2 text-center">
           Tea Courses
         </h1>
@@ -59,6 +66,7 @@ export default function Page() {
       </div>
 
       {/* PRODUCTS Section */}
+
       <ListTeaCourses />
     </div>
   );
@@ -67,10 +75,12 @@ export default function Page() {
 async function ListTeaCourses() {
   const courses = await getTeaCourses();
 
+
   return (
     <div className="w-full p-3 flex flex-wrap gap-3">
       {courses.map((course) => (
         <div key={course._id}>
+          <Image  src={course.image} alt={course.name} height={200} width={200} />
           <CourseProduct course={course} />
         </div>
       ))}
@@ -86,9 +96,8 @@ function CourseProduct({ course }: any) {
         <CardTitle className="text-lg">{course.name}</CardTitle>
         <CardDescription className="text-slate-500 font-semibold">
           <div className="flex flex-row gap-4">
-
-          <p>27.3.2024</p>
-          <p>from 9:00 to 15:00</p>
+            <p>27.3.2024</p>
+            <p>from 9:00 to 15:00</p>
           </div>
         </CardDescription>
       </CardHeader>

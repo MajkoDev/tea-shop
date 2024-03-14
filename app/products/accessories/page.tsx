@@ -11,6 +11,8 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+import Link from "next/link";
 
 interface TeaAccessory {
   _id: string;
@@ -19,8 +21,8 @@ interface TeaAccessory {
   description: string;
   price: number;
   currency: string;
+  images: any;
 }
-
 
 // Fetching Tea Accessories
 const getTeaAccessories = async (): Promise<TeaAccessory[]> => {
@@ -30,15 +32,65 @@ const getTeaAccessories = async (): Promise<TeaAccessory[]> => {
     "slug": slug.current,
     description, 
     price, 
-    currency
+    currency,
+    images,
+
   }`;
   const data = await client.fetch(query);
   return data;
 };
 
+async function TestFetch() {
+  const products = await getTeaAccessories();
+
+  console.log(products);
+
+  return (
+    <div className="h-96 w-full">
+      <div className="text-center text-2xl pb-12">Text Fetch</div>
+      {products.map((product) => (
+        <div
+          key={product._id}
+          className="flex flex-row gap-1 m-4 border border-slate-900 p-2 border-solid"
+        >
+          <Link href={`/products/accessories/${product.slug}`}>
+            <h2 className="text-center">{product.name}</h2>
+            <ImageGallery images={product.images} />
+          </Link>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ImageGallery({ images }: any) {
+  return (
+    <>
+      {images.map((image: any, idx: any) => (
+        <div key={idx} className="flex flex-row gap-1">
+          <Image src={urlFor(image).url()} width={200} height={200} alt="img" />
+        </div>
+      ))}
+    </>
+  );
+}
+
 export default function Page() {
   return (
     <div>
+      <TestFetch />
+
+      <div className="h-96" />
+
+      <div className="w-full min-h-96 bg-slate-200 rounded-lg">
+        <div className="text-center font-semibold text-xl my-3">
+          Product List
+        </div>
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></div>
+      </div>
+
+      <div className="h-96" />
+
       {/* HERO */}
       <section className="w-full h-[93vh] bg-slate-50 mx-auto">
         <div className="flex flex-col md:flex-row">
@@ -129,8 +181,6 @@ export default function Page() {
     </div>
   );
 }
-
-
 
 function TeaAccessoryCard() {
   return (

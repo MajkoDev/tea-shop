@@ -23,8 +23,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head />
       <body
         className={cn(
@@ -34,7 +36,7 @@ export default function RootLayout({
       >
         <Providers>
           <SiteHeader />
-          
+
           <main className="px-[1.4rem] md:px-[4rem] lg:px-[6rem] xl:px-[8rem] 2xl:px-[8rem]">
             {children}
           </main>

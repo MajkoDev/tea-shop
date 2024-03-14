@@ -26,9 +26,8 @@ const getTeaProducts = async (): Promise<cartProduct[]> => {
   return data;
 };
 
-export default async function Page() {
-  const products: cartProduct[] = await getTeaProducts();
-  console.log(products);
+export default function Page() {
+
 
   return (
     <div>
