@@ -41,56 +41,13 @@ const getTeaAccessories = async (): Promise<TeaAccessory[]> => {
   return data;
 };
 
-//////////////////  DONE     ////////////////////////
-
-async function TestFetch() {
-  const products = await getTeaAccessories();
-
-  return (
-    <div className="h-96 w-full">
-      <div className="text-center text-2xl pb-12">Text Fetch</div>
-      {products.map((product) => (
-        <div
-          key={product._id}
-          className="flex flex-row gap-1 m-4 border border-slate-900 p-2 border-solid"
-        >
-          <Link href={`/products/accessories/${product.slug}`}>
-            <h2 className="text-center">{product.name}</h2>
-            <ImageGallery images={product.images} />
-          </Link>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function ImageGallery({ images }: any) {
-  return (
-    <>
-      {images.map((image: any, idx: any) => (
-        <div key={idx} className="flex flex-row gap-1">
-          <Image src={urlFor(image).url()} width={200} height={200} alt="img" />
-        </div>
-      ))}
-    </>
-  );
-}
-
 export default function Page() {
   return (
     <div>
-      <TestFetch />
-
-      <div className="h-96" />
-
-      <div className="w-full min-h-96 bg-slate-200 rounded-lg">
-        <div className="text-center font-semibold text-xl my-3">
-          Product List
-        </div>
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></div>
+      <div className="text-center font-semibold text-xl my-12">
+        Product List
       </div>
-
-      <div className="h-66" />
+      <div className="h-24" />
 
       {/*  HERO Section
           <HeroSection />
@@ -98,8 +55,6 @@ export default function Page() {
 
       {/* PRODUCTS */}
       <ProductsList />
-
-      <section className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:col-span-3 lg:gap-x-8 pb-12"></section>
     </div>
   );
 }
@@ -181,7 +136,7 @@ async function ProductsList() {
       </div>
 
       <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:col-span-3 lg:gap-x-8 pb-12">
-       {accessories.map((accessory) => (
+        {accessories.map((accessory) => (
           <div key={accessory._id}>
             <FirstProductCard accessory={accessory} />
           </div>
@@ -241,19 +196,12 @@ function FirstProductCard({ accessory }: any) {
 // product card (type two)
 function SecondProductCard({ accessory }: any) {
   return (
-    <a href="#" className="group block">
+    <Link
+      href={`/products/accessories/${accessory.slug}`}
+      className="group block"
+    >
       <div className="relative h-[250px] sm:h-[350px]">
-        <img
-          src="https://images.unsplash.com/photo-1592921870789-04563d55041c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-100 group-hover:opacity-0"
-        />
-
-        <img
-          src="https://images.unsplash.com/photo-1594385208974-2e75f8d7bb48?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100"
-        />
+        <ImageGalleryForSecondProductCard images={accessory.images} />
       </div>
 
       <div className="mt-3">
@@ -266,6 +214,27 @@ function SecondProductCard({ accessory }: any) {
           quibusdam ab maiores placeat odio id?
         </p>
       </div>
-    </a>
+    </Link>
+  );
+}
+
+function ImageGalleryForSecondProductCard({ images }: any) {
+  return (
+    <>
+      {images.map((image: any, idx: any) => (
+        <Image
+          key={idx}
+          src={urlFor(image).url()}
+          width={400}
+          height={400}
+          className={`absolute inset-0 h-full w-full object-cover ${
+            idx % 2 === 0
+              ? "opacity-100 group-hover:opacity-0"
+              : "opacity-0 group-hover:opacity-100"
+          }`}
+          alt="img"
+        />
+      ))}
+    </>
   );
 }
