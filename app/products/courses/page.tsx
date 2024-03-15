@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import Image from "next/image";
 
@@ -22,7 +22,7 @@ interface Course {
   description: string;
   price: number;
   currency: string;
-  image: string
+  image: string;
 }
 
 // Fetching Tea Courses
@@ -75,12 +75,10 @@ export default function Page() {
 async function ListTeaCourses() {
   const courses = await getTeaCourses();
 
-
   return (
     <div className="w-full p-3 flex flex-wrap gap-3">
       {courses.map((course) => (
         <div key={course._id}>
-          <Image  src={course.image} alt={course.name} height={200} width={200} />
           <CourseProduct course={course} />
         </div>
       ))}
@@ -89,28 +87,41 @@ async function ListTeaCourses() {
 }
 
 // Course Card
+
 function CourseProduct({ course }: any) {
   return (
-    <Card className="container">
-      <CardHeader className="mb-0">
-        <CardTitle className="text-lg">{course.name}</CardTitle>
-        <CardDescription className="text-slate-500 font-semibold">
-          <div className="flex flex-row gap-4">
-            <p>27.3.2024</p>
-            <p>from 9:00 to 15:00</p>
-          </div>
-        </CardDescription>
-      </CardHeader>
+    <Card className="group m-2 shadow-xl h-fit p-2 rounded-xl flex flex-row gap-2">
+      <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-xl md:w-1/2 lg:w-1/3 hidden md:visible md:block">
+        <Image
+          src={course.image}
+          alt={course.name}
+          height={500}
+          width={500}
+          className="h-full object-cover transition group-hover:scale-105 duration-500 ease-in-out"
+        />
+      </div>
 
-      <CardContent>
-        <h3 className="text-slate-500 font-extrabold text-sm">Description</h3>
-        <p className="text-sm">{course.description}</p>
-      </CardContent>
+      <div className="p-1 w-full md:w-1/2 lg:w-2/3">
+        <CardHeader className="mb-0">
+          <CardTitle className="text-lg">{course.name}</CardTitle>
+          <CardDescription className="text-slate-900 font-semibold">
+            <div className="flex flex-row gap-4 mt-2 font-semibold text-sm/relaxed text-gray-500">
+              <p>27.3.2024</p>
+              <p>from 9:00 to 15:00</p>
+            </div>
+          </CardDescription>
+        </CardHeader>
 
-      <CardFooter className="flex justify-between">
-        <Button variant="outline">I am interested</Button>
-        <Button>Enroll for course</Button>
-      </CardFooter>
+        <CardContent>
+          <h3 className="text-slate-500 font-extrabold text-sm">Description</h3>
+          <p className="text-sm">{course.description}</p>
+        </CardContent>
+
+        <CardFooter className="flex justify-between">
+          <Button variant="outline">I am interested</Button>
+          <Button>Enroll for course</Button>
+        </CardFooter>
+      </div>
     </Card>
   );
 }
